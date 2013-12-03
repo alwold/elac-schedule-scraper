@@ -1,0 +1,2 @@
+class ElacScheduleScraper
+end
