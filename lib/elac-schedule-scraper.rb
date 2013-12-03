@@ -15,6 +15,17 @@ class ElacScheduleScraper
   end
 
   def get_class_status(term, subject, section)
+    doc = ElacScheduleScraper.do_course_search(term, subject)
+    doc.xpath("//table[@id='gvCourseAvailable']//tr[td]").each do |course|
+      if course.xpath("td")[1].text == section
+        if course.xpath("td")[7].text.to_i > 0
+          return :open
+        else
+          return :closed
+        end
+      end
+    end
+    return nil
   end
 
   def self.do_course_search(term, subject)
