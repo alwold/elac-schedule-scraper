@@ -24,4 +24,9 @@ describe ElacScheduleScraper do
     open = get_class(:open)
     expect(scraper.get_class_status(term, open.subject, open.section)).to eq(:open)
   end
+  it 'gets nil for nonexistent class' do
+    scraper = ElacScheduleScraper.new
+    term = get_current_term
+    expect(scraper.get_class_status(term, 'foo', 'bar')).to be_nil
+  end
 end
