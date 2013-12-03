@@ -1,4 +1,3 @@
-require 'elac-schedule-scraper'
 require 'elac-schedule-scraper-spec-helpers'
 
 RSpec.configure do |config|
@@ -6,7 +5,17 @@ RSpec.configure do |config|
 end
 
 describe ElacScheduleScraper do
-  it "gets current term" do
+  it 'gets current term' do
     expect(get_current_term.length).to eq(5)
+  end
+  it 'can get class info' do
+    scraper = ElacScheduleScraper.new
+    ci = scraper.get_class_info('20140', 'ACADPR', '8701')
+    expect(ci.name).to eq('LANGUAGE ARTS: WRITING ESSAYS')
+    expect(ci.schedule).to eq('MWF 9:00AM-11:05AM')
+  end
+  it 'returns nil for nonexistent class' do
+    scraper = ElacScheduleScraper.new
+    expect(scraper.get_class_info('20140', 'foo', 'bar')).to be_nil
   end
 end
