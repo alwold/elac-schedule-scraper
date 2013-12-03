@@ -1,4 +1,4 @@
-require '../lib/elac-schedule-scraper'
+require 'elac-schedule-scraper'
 require 'elac-schedule-scraper-spec-helpers'
 
 RSpec.configure do |config|
