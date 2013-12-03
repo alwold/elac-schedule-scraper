@@ -12,7 +12,7 @@ module ElacScheduleScraperSpecHelpers
       ci.section = course.xpath("td")[1].text
       if status == :open && seats > 0
         return ci
-      elsif seats == 0
+      elsif status == :closed && seats == 0
         return ci
       end
     end
