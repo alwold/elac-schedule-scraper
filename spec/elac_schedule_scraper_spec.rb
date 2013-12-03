@@ -6,4 +6,7 @@ RSpec.configure do |config|
 end
 
 describe ElacScheduleScraper do
+  it "gets current term" do
+    expect(get_current_term.length).to eq(5)
+  end
 end

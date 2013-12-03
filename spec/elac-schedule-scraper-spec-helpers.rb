@@ -2,14 +2,14 @@ require 'net/http'
 require 'nokogiri'
 
 module ElacScheduleScraperSpecHelpers
-  def get_class(status)
+  def get_class(status, term = get_current_term)
     uri = URI('http://academicportal.elac.edu/searchengine.aspx')
     doc = Nokogiri::HTML(Net::HTTP.get(uri))
 
     viewstate = doc.xpath("//input[@name='__VIEWSTATE']")[0]['value']
     eventvalidation = doc.xpath("//input[@name='__EVENTVALIDATION']")[0]['value']
 
-    res = Net::HTTP.post_form(uri, '__VIEWSTATE' => viewstate, '__EVENTVALIDATION' => eventvalidation, 'ddlSemester' => '20140', 'ddlCourseName' => '', 'txtSearch' => '', 'ddlDeptName' => '', 'ddOnlineClasses' => '', 'ddDays' => '', 'cmdSearchClasses.x' => '81', 'cmdSearchClasses.y' => '13')
+    res = Net::HTTP.post_form(uri, '__VIEWSTATE' => viewstate, '__EVENTVALIDATION' => eventvalidation, 'ddlSemester' => term, 'ddlCourseName' => '', 'txtSearch' => '', 'ddlDeptName' => '', 'ddOnlineClasses' => '', 'ddDays' => '', 'cmdSearchClasses.x' => '81', 'cmdSearchClasses.y' => '13')
     doc = Nokogiri::HTML(res.body)
     doc.xpath("//table[@id='gvCourseAvailable']//tr[td]").each do |course|
       seats = course.xpath("td")[7].text.to_i
@@ -22,6 +22,12 @@ module ElacScheduleScraperSpecHelpers
         return ci
       end
     end
+  end
+
+  def get_current_term
+    uri = URI('http://academicportal.elac.edu/searchengine.aspx')
+    doc = Nokogiri::HTML(Net::HTTP.get(uri))
+    doc.xpath("//select[@name='ddlSemester']/option[@selected='selected']")[0]['value']
   end
 end
 
