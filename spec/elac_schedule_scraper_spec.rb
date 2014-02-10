@@ -10,9 +10,9 @@ describe ElacScheduleScraper do
   end
   it 'can get class info' do
     scraper = ElacScheduleScraper.new
-    ci = scraper.get_class_info('20140', 'ACADPR', '8701')
-    expect(ci.name).to eq('LANGUAGE ARTS: WRITING ESSAYS')
-    expect(ci.schedule).to eq('MWF 9:00AM-11:05AM')
+    ci = scraper.get_class_info('20141', 'ACADPR', '8701')
+    expect(ci.name).to eq('LANGUAGE ARTS: WRITING SENTENCES')
+    expect(ci.schedule).to eq('MW 9:10AM-10:40AM')
   end
   it 'returns nil for nonexistent class' do
     scraper = ElacScheduleScraper.new
