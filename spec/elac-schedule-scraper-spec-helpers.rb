@@ -21,7 +21,7 @@ module ElacScheduleScraperSpecHelpers
   def get_current_term
     uri = URI('http://academicportal.elac.edu/searchengine.aspx')
     doc = Nokogiri::HTML(Net::HTTP.get(uri))
-    doc.xpath("//select[@name='ddlSemester']/option[@selected='selected']")[0]['value']
+    doc.xpath("//select[@name='ddlSemester']/option")[1]['value']
   end
 end
 
