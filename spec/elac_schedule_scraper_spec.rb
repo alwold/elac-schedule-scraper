@@ -16,7 +16,7 @@ describe ElacScheduleScraper do
   end
   it 'returns nil for nonexistent class' do
     scraper = ElacScheduleScraper.new
-    expect(scraper.get_class_info('20140', 'foo', 'bar')).to be_nil
+    expect(scraper.get_class_info(get_current_term, 'foo', 'bar')).to be_nil
   end
   it 'gets status of an open class' do
     scraper = ElacScheduleScraper.new
