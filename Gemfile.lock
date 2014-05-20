@@ -1,10 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    builder (3.2.2)
+    ci_reporter (1.9.0)
+      builder (>= 2.1.2)
     diff-lcs (1.2.5)
     mini_portile (0.5.2)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    rake (10.3.1)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -18,5 +22,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ci_reporter
   nokogiri
+  rake
   rspec
